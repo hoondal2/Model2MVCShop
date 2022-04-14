@@ -41,6 +41,7 @@ public class AddPurchaseAction extends Action {
 	purchaseVO.setDivyDate(request.getParameter("receiverDate"));
 	purchaseVO.setPurchaseProd(productVO);
 	purchaseVO.setBuyer(user);
+	purchaseVO.setTranCode("aaa");
 	
 	// tranCode 세팅 => UpdateTranCodeAction에서 구현
 	//purchaseVO.setTranCode(request.getParameter("tranCode")); // 초기값 = "aaa" -> 판매중
@@ -52,10 +53,10 @@ public class AddPurchaseAction extends Action {
 	
 	//purchaseVO = pcService.getPurchase(tranNo);
 	//request.setAttribute("purchaseVO", purchaseVO);
-	request.setAttribute("productVO", productVO);
+	request.setAttribute("purchase", purchaseVO);
 	
 	// UpdateTranCodeAction로 이동, proTranCode 변경
-		return "forward:/updateTranCode.do";
+		return "forward:/purchase/addPurchase.jsp";
 	}	
 }
 

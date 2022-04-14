@@ -19,9 +19,10 @@ public class UpdateTranCodeByProdAction extends Action {
 		// tranCode가 세팅된 purchase객체를 받아와서 proTranCode 세팅
 		// getProduct로 product객체 가져오기 이때 인자값으로 purchaseVO의 prodNo과 같을때의 prodNo을 준다
 		PurchaseVO purchaseVO = (PurchaseVO)request.getAttribute("purchase");
-		
+		System.out.println(purchaseVO);
 		ProductService pdService=new ProductServiceImpl();
 		int prodNo = (purchaseVO.getPurchaseProd().getProdNo());
+		
 		ProductVO productVO = pdService.getProduct(prodNo);
 		
 		if("aaa".equals(purchaseVO.getTranCode())) {

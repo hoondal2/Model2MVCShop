@@ -112,7 +112,7 @@ function fncGetUserList(){
 	<%if("aaa".equals(vo.getTranCode())){%>
 		구매완료
 	<%}else if("bbb".equals(vo.getTranCode())){%>
-		배송중 <a href="/updateTranCodeByProd.do?userId=<%=user.getUserId() %>"> 물건도착</a>
+		배송중 <a href="/updateTranCode.do?tranCode=<%=vo.getTranNo() %>"> 물건도착</a>
 	<%}else if("ccc".equals(vo.getTranCode())){%>
 		배송완료
 	<%} %>

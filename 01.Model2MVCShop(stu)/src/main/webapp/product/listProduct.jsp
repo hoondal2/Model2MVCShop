@@ -11,9 +11,11 @@
 	
 	int total=0;
 	ArrayList<ProductVO> list=null;
+	ArrayList<Integer> tranNoList = null;
 	if(map != null){
 		total=((Integer)map.get("count")).intValue();
-		list=(ArrayList<ProductVO>)map.get("list");
+		list=(ArrayList<ProductVO>)map.get("list");	
+		tranNoList=(ArrayList<Integer>)map.get("tranNoList");	
 	}
 	
 	
@@ -166,10 +168,9 @@ function fncGetProductList(){
 		for(int i=0; i<list.size(); i++) {
 			ProductVO vo = (ProductVO)list.get(i);
 			/////////////////////////////////////////
-			if((Integer)map.get("tranNo")!=null){
-				tranNo = (Integer)map.get("tranNo");
-				System.out.println(tranNo);
-			}
+			tranNo = tranNoList.get(i);
+			System.out.println("tranNoList에서 가져온 tranNo의 값 : " +tranNo);
+		
 	%>
 	<tr class="ct_list_pop">
 		<td align="center"><%=no--%></td>
@@ -201,7 +202,7 @@ function fncGetProductList(){
 			 <%=vo.getProTranCode() %>
 		 <% if(vo.getProTranCode().equals("구매완료") ){%>
 		 	<!-- 배송하기 클릭 시 , 해당하는 상품의 tranCode가 변경되어야 한다. (판매중인 상품의 tranNo은 0)  -->
-		 	<a href="/updateTranCode.do?tranNo=<%=tranNo%>">  배송하기</a>
+		 	<a href="/updateTranCode.do?tranNo=<%= tranNo%>">  배송하기</a>
 		 <%}}%>
 		
 		</td>		

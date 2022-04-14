@@ -22,10 +22,8 @@ public class UpdateTranCodeAction extends Action {
 	// tranCode가 null이 아니고 aaa라면? -> bbb로 세팅후 dao통해 vo에 세팅
 		// dao 세팅 안해쥼 ...........
 		PurchaseService pcService=new PurchaseServiceImpl();
-		int tranNo = 
-		PurchaseVO purchaseVO =  pcService.getPurchase(tranNo);
+		PurchaseVO purchaseVO =  pcService.getPurchase(Integer.parseInt(request.getParameter("tranNo")));
 		System.out.println("purchaseVO 정보 : " +purchaseVO);
-		System.out.println("tranCode는 널????????????????? "+purchaseVO.getTranCode());
 		
 		if(purchaseVO.getTranCode()!=null) { // 널 에러
 			if("aaa".equals( (purchaseVO.getTranCode()) )){

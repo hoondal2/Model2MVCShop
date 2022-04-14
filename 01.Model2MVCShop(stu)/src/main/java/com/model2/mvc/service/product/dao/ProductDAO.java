@@ -124,6 +124,8 @@ public ProductVO findProduct(String prodName) throws Exception { //유저 등록
 		System.out.println("searchVO.getPageUnit():" + searchVO.getPageUnit());
 
 		ArrayList<ProductVO> list = new ArrayList<ProductVO>();
+		ArrayList<Integer> tranNoList = new ArrayList<Integer>();
+
 		if (total > 0) {
 			for (int i = 0; i < searchVO.getPageUnit(); i++) {
 				ProductVO vo = new ProductVO();
@@ -136,21 +138,18 @@ public ProductVO findProduct(String prodName) throws Exception { //유저 등록
 				vo.setRegDate(rs.getDate("REG_DATE"));
 				
 	//////////////////////////// purchase 추가한 부분 //////////////////////////////////
-				
 				if("aaa".equals(rs.getString("tran_status_code"))) {
 					vo.setProTranCode("구매완료");
-					map.put("tranNo", rs.getInt("tran_no"));
+					tranNoList.add(rs.getInt("tran_no"));
 					
 				}else if("bbb".equals(rs.getString("tran_status_code"))) {
 					vo.setProTranCode("배송중");
-					map.put("tranNo", rs.getInt("tran_no"));
+					tranNoList.add(rs.getInt("tran_no"));
 					
 				}else if("ccc".equals(rs.getString("tran_status_code"))) {
 					vo.setProTranCode("배송완료");
-					map.put("tranNo", rs.getInt("tran_no"));
-				}
-				
-				
+					tranNoList.add(rs.getInt("tran_no"));
+				}else {tranNoList.add(rs.getInt("tran_no"));}
 				
 	///////////////////////// ///////////////////// ///////////////////////////////
 
@@ -163,6 +162,7 @@ public ProductVO findProduct(String prodName) throws Exception { //유저 등록
 		map.put("list", list);
 		System.out.println("map().size() : "+ map.size());
 
+		map.put("tranNoList", tranNoList);
 		con.close();
 			
 		return map;

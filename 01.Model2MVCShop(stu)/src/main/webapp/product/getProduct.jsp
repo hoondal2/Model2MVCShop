@@ -1,3 +1,5 @@
+
+<%@page import="java.net.URLDecoder"%>
 <%@page import="java.net.URLEncoder"%>
 <%@ page contentType="text/html; charset=euc-kr"%>
 
@@ -16,7 +18,8 @@
 	ProductVO vo = (ProductVO)request.getAttribute("vo");
 %>
 
-<%--Cookie[] cookies = request.getCookies();
+<%--
+	Cookie[] cookies = request.getCookies();
 	
 	if(menu.equals("search")){
 		Cookie cookie = new Cookie("history",URLEncoder.encode(Integer.toString(vo.getProdNo())));
@@ -31,14 +34,14 @@
 	}
 --%>
 
-<%--
+<%
 	// 고친 부분
 	String prvHistory = "";
 	   
 	   for (Cookie c:request.getCookies()){
 	      if (c.getName().equals("history")){
-	         prvHistory=c.getValue();
-	         System.out.println("getProduct: "+ prvHistory);         
+	         prvHistory=URLDecoder.decode(c.getValue(), "utf-8");
+	         System.out.println("getProduct: " + prvHistory);         
 	      }
 	   }
 	   // Cookie는 Request, Response를 가지고 불러오기 또는 전달이 이루어진다.
@@ -46,10 +49,10 @@
 	   int prodNo= vo.getProdNo();
 	   System.out.println("getProduct: "+ prvHistory);
 	   System.out.println("getProduct: "+ prodNo+","+prvHistory);
-	   Cookie cookie = new Cookie("history", prodNo+","+prvHistory);   // 쿠키 생성
+	   Cookie cookie = new Cookie("history", URLEncoder.encode(prodNo+","+prvHistory, "utf-8"));   // 쿠키 생성
 	   cookie.setMaxAge(60*60);   // 현재 Cookie의 유지기간
 	   response.addCookie(cookie);
-	 --%>
+%>
 
 <% String menu = request.getParameter("menu");
 	System.out.println(menu);
