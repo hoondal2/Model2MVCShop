@@ -54,13 +54,17 @@ public class PurchaseDAO {
 		stmt.setInt(1, tranNo);
 
 		ResultSet rs = stmt.executeQuery();
-
+		ProductVO purchaseProd = purchaseVO.getPurchaseProd();
+		UserVO buyer = purchaseVO.getBuyer();
+		ProductVO productVO = new ProductVO();
 		PurchaseVO purchaseVO = new PurchaseVO();
 		while (rs.next()) {
 			
 			purchaseVO.setTranNo(rs.getInt("tran_no"));
-			//purchaseVO.getPurchaseProd().setProdNo(rs.getInt("prod_no")); //purchaseVO.setPurchaseProd(ProductVO 들어가야 한다.) => 
+			purchaseProd.setProdNo(rs.getInt("prod_no"));
+			//purchaseVO.setPurchaseProd(purchaseVO.getPurchaseProd().setProdNo(rs.getInt("prod_no"))); //purchaseVO.setPurchaseProd(ProductVO 들어가야 한다.) => 
 			//purchaseVO.getBuyer().setUserId(rs.getString("buyer_id"));
+			buyer.setUserId(rs.getString("buyer_id"));
 			purchaseVO.setPaymentOption(rs.getString("payment_option"));
 			purchaseVO.setReceiverName(rs.getString("receiver_name"));
 			purchaseVO.setReceiverPhone(rs.getString("receiver_phone"));

@@ -43,8 +43,9 @@ public class UpdateTranCodeAction extends Action {
 		//productVO.setProTranCode("∆«∏≈¡ﬂ");
 		
 		request.setAttribute("purchase", purchaseVO);
-
-		return "forward:/updateTranCodeByProd.do";
-	
+		if("manage".equals(request.getParameter("menu"))) {
+			return "forward:/listProduct.do?menu=manage";
+		}
+		return "forward:/listPurchase.do";
 	}
 }

@@ -22,8 +22,8 @@ public class LoginAction extends Action{
 		UserService service=new UserServiceImpl();
 		UserVO dbVO=service.loginUser(userVO);
 		
-		HttpSession session=request.getSession();
-		session.setAttribute("user", dbVO);
+		HttpSession session=request.getSession(); // 技记 掘扁
+		session.setAttribute("user", dbVO); // 技记俊 蜡历 按眉 历厘
 		
 		return "redirect:/index.jsp";
 	}

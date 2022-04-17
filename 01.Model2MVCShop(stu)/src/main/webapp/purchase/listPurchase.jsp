@@ -90,10 +90,12 @@ function fncGetUserList(){
 		for(int i=0; i<list.size(); i++) {
 			PurchaseVO vo = (PurchaseVO)list.get(i);
 			
-			System.out.println(vo.getTranCode()); // null 나옴 ....
+			System.out.println(vo.getTranCode());
+		
 	%>
 	<tr class="ct_list_pop">
-		<td align="center"><%=no--%></td>
+		<td align="center">
+			<a href="/getPurchase.do?tranNo=<%=vo.getTranNo() %>"><%=no--%></td>
 		<td></td>
 		<td align="left">
 			<a href="/getUser.do?userId=<%=user.getUserId() %>">
@@ -112,7 +114,7 @@ function fncGetUserList(){
 	<%if("aaa".equals(vo.getTranCode())){%>
 		구매완료
 	<%}else if("bbb".equals(vo.getTranCode())){%>
-		배송중 <a href="/updateTranCode.do?tranCode=<%=vo.getTranNo() %>"> 물건도착</a>
+		배송중 <a href="/updateTranCode.do?tranNo=<%=vo.getTranNo() %>"> 물건도착</a>
 	<%}else if("ccc".equals(vo.getTranCode())){%>
 		배송완료
 	<%} %>
